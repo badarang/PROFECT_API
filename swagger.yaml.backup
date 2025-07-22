@@ -89,52 +89,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Address'
-  /users/{username}/addresses/{address_id}:
-    put:
-      tags: [주소]
-      summary: 주소 수정
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: address_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AddressUpdate'
-      responses:
-        '200':
-          description: 주소 수정 결과
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Address'
-    delete:
-      tags: [주소]
-      summary: 주소 삭제(숨김 처리)
-      description: 실제 삭제가 아닌 soft delete(숨김 처리)입니다.
-      parameters:
-        - name: username
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: address_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: 삭제(숨김 처리) 성공
   /categories:
     get:
       tags: [카테고리]
@@ -542,42 +496,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Review'
-  /reviews/{review_id}:
-    put:
-      tags: [리뷰]
-      summary: 리뷰 수정
-      parameters:
-        - name: review_id
-          in: path
-          required: true
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ReviewUpdate'
-      responses:
-        '200':
-          description: 리뷰 수정 결과
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Review'
-    delete:
-      tags: [리뷰]
-      summary: 리뷰 삭제(숨김 처리)
-      description: 실제 삭제가 아닌 soft delete(숨김 처리)입니다.
-      parameters:
-        - name: review_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '204':
-          description: 삭제(숨김 처리) 성공
   /stores/{store_id}/reviews:
     get:
       tags: [리뷰]
@@ -665,17 +583,6 @@ components:
           type: string
         detail_addr:
           type: string
-    AddressUpdate:
-      type: object
-      properties:
-        zipcode:
-          type: string
-        road_addr:
-          type: string
-        detail_addr:
-          type: string
-        is_selected:
-          type: boolean
     Address:
       type: object
       properties:
@@ -688,8 +595,6 @@ components:
         detail_addr:
           type: string
         is_selected:
-          type: boolean
-        is_deleted:
           type: boolean
     Category:
       type: object
@@ -900,13 +805,6 @@ components:
           type: integer
         content:
           type: string
-    ReviewUpdate:
-      type: object
-      properties:
-        rating:
-          type: integer
-        content:
-          type: string
     Review:
       type: object
       properties:
@@ -922,8 +820,6 @@ components:
           type: integer
         content:
           type: string
-        is_deleted:
-          type: boolean
     AIResponseCreate:
       type: object
       properties:
