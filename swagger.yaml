@@ -218,7 +218,8 @@ paths:
                 $ref: '#/components/schemas/Store'
     delete:
       tags: [가게]
-      summary: 가게 삭제
+      summary: 가게 삭제(숨김 처리)
+      description: 실제 삭제가 아닌 soft delete(숨김 처리)입니다.
       parameters:
         - name: store_id
           in: path
@@ -227,7 +228,7 @@ paths:
             type: string
       responses:
         '204':
-          description: 삭제 성공
+          description: 삭제(숨김 처리) 성공
   /menus:
     post:
       tags: [메뉴]
@@ -305,7 +306,8 @@ paths:
                 $ref: '#/components/schemas/Menu'
     delete:
       tags: [메뉴]
-      summary: 메뉴 삭제
+      summary: 메뉴 삭제(숨김 처리)
+      description: 실제 삭제가 아닌 soft delete(숨김 처리)입니다.
       parameters:
         - name: menu_id
           in: path
@@ -314,7 +316,7 @@ paths:
             type: string
       responses:
         '204':
-          description: 삭제 성공
+          description: 삭제(숨김 처리) 성공
   /orders:
     post:
       tags: [주문]
@@ -731,6 +733,8 @@ components:
           type: number
         store_lon:
           type: number
+        is_deleted:
+          type: boolean
     MenuCreate:
       type: object
       properties:
@@ -764,6 +768,8 @@ components:
           type: number
         description:
           type: string
+        is_deleted:
+          type: boolean
     OrderCreate:
       type: object
       properties:
