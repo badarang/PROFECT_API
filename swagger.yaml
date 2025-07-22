@@ -31,6 +31,29 @@ paths:
       responses:
         '201':
           description: Created
+  /users/login:
+    post:
+      tags: [사용자]
+      summary: 로그인
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserLogin'
+      responses:
+        '200':
+          description: 로그인 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: JWT 토큰
+        '401':
+          description: 로그인 실패 (잘못된 정보)
   /users/{username}:
     get:
       tags: [사용자]
@@ -559,6 +582,13 @@ components:
         nickname:
           type: string
         email:
+          type: string
+        password:
+          type: string
+    UserLogin:
+      type: object
+      properties:
+        username:
           type: string
         password:
           type: string
